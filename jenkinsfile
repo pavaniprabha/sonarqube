@@ -1,16 +1,34 @@
-node {
-  stage('Clone the Git') {
-    git 'https://github.com/pavaniprabha/sonarqube.git'
-  }
-  stage('SonarQube analysis') {
-    def scannerHome = tool 'sonarqube';
-    withSonarQubeEnv('sonarqube') {
-      sh "${scannerHome}/bin/sonar-scanner \
-      -D sonar.login=admin \
-      -D sonar.password=pavani \
-      -D sonar.projectKey=sonarqubetest \
-      -D sonar.exclusions=vendor/**,resources/**,**/*.java \
-      -D sonar.host.url=http://15.206.174.81:9000/"
+
+pipeline {
+    agent any
+
+    tools {
+        maven "MAVEN"
+        jdk "JDK"
     }
-  }
+
+    stages {
+        stage('Initialize'){
+            steps{
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
+            }
+        }
+        stage('Build') {
+            steps {
+                dir("/var/lib/jenkins/workspace/sonarqube1") {
+                sh 'mvn clean package'
+                }
+            
+            }
+        }
+     }
+    post {
+       always {
+          junit(
+        allowEmptyResults: true,
+        testResults: '*/test-reports/.xml'
+      )
+      }
+   } 
 }
