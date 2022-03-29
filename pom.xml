@@ -28,6 +28,12 @@
   </dependencies>
 
   <build>
+    <profile>
+          <id>sonar</id>
+          <activation>
+          <activeByDefault>true</activeByDefault>
+          </activation>
+      </profile>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -40,12 +46,6 @@
           <artifactId>sonar-maven-plugin</artifactId>
           <version>4.7.0.2747</version>
        </plugin>
-       <profile>
-          <id>sonar</id>
-          <activation>
-          <activeByDefault>true</activeByDefault>
-          </activation>
-       </profile>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
