@@ -8,9 +8,16 @@
   <artifactId>my-app</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>my-app</name>
+  <name>sonarqube</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://13.233.119.87:9000/</url>
+  
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,12 +35,6 @@
   </dependencies>
 
   <build>
-  <profile>
-          <id>sonar</id>
-          <activation>
-          <activeByDefault>true</activeByDefault>
-          </activation>
-      </profile>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -83,4 +84,6 @@
       </plugins>
     </pluginManagement>
   </build>
+ </profile>
+</profiles>    
 </project>
